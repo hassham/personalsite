@@ -1,0 +1,134 @@
+/* Color Palette */
+:root {
+  --primary-cyan: #00bcd4;
+  --primary-white: #ffffff;
+  --dark-navy: #0a2239;
+  --accent-yellow: #ffc93c;
+  --text-dark: #232c33;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: var(--primary-white);
+  color: var(--text-dark);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--dark-navy);
+  padding: 0.7rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  color: var(--primary-cyan);
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+}
+.nav-links li a {
+  color: var(--primary-white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links li a:hover {
+  color: var(--primary-cyan);
+  border-bottom: 2px solid var(--accent-yellow);
+}
+
+.section {
+  padding: 4rem 1.2rem 2.3rem;
+  /*max-width: 820px;*/
+  margin: 0 auto;
+}
+.landing {
+  background: linear-gradient(135deg, var(--primary-cyan) 65%, var(--accent-yellow) 100%);
+  color: var(--dark-navy);
+  text-align: center;
+  padding-top: 5rem;
+  padding-bottom: 3.2rem;
+}
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid var(--dark-navy);
+  margin-bottom: 1.2rem;
+  background: var(--primary-white);
+}
+.landing h1 {
+  margin: 0.1rem 0 0.3rem;
+  font-size: 2.5rem;
+}
+.tagline {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.section h2 {
+  color: var(--primary-cyan);
+  margin-bottom: 0.7rem;
+}
+.section ul {
+  padding-left: 1.6rem;
+}
+.experience-list {
+  margin-top: 1rem;
+}
+.experience-item {
+  border-left: 3px solid var(--primary-cyan);
+  padding-left: 1rem;
+  margin-bottom: 1.3rem;
+}
+.experience-item .years {
+  font-size: 0.97rem;
+  color: var(--dark-navy);
+  font-weight: 500;
+}
+.project-list {
+  margin-top: 0.7rem;
+}
+.project-item {
+  border: 1.5px solid var(--dark-navy);
+  border-radius: 9px;
+  padding: 1rem 1.2rem;
+  background: #f3fcff;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 6px rgba(0,188,212,0.08);
+}
+
+/* Contact links */
+.section a {
+  color: var(--dark-navy);
+  text-decoration: underline;
+}
+.section a:hover {
+  color: var(--primary-cyan);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .navbar, .section {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+  .landing h1 {
+    font-size: 2rem;
+  }
+  .profile-img {
+    width: 90px;
+    height: 90px;
+  }
+}
