@@ -1,5 +1,18 @@
 // Skills section toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
+  // Highlight active navigation link
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.main-nav a');
+  
+  navLinks.forEach(link => {
+    const linkPage = link.getAttribute('href').split('/').pop().split('#')[0];
+    if (linkPage === currentPage || 
+        (currentPage === '' && linkPage === 'index.html') ||
+        (currentPage.includes('blog/') && linkPage === 'blog.html')) {
+      link.classList.add('active');
+    }
+  });
+  
   const aboutSection = document.querySelector('#about');
   const skillsSection = document.querySelector('#skills');
   
@@ -20,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Smooth scroll for navigation links
-  const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
-  navLinks.forEach(link => {
+  const navLinksWithHash = document.querySelectorAll('.main-nav a[href^="#"]');
+  navLinksWithHash.forEach(link => {
     link.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href').substring(1);
       const targetSection = document.getElementById(targetId);
