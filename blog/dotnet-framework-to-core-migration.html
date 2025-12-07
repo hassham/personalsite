@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From .NET Framework to .NET Core: A Migration Story - Hasham Ahmad</title>
+  <meta name="description" content="Real-world lessons from migrating enterprise applications to modern .NET. Challenges, solutions, and what I wish I'd known.">
+  <meta name="keywords" content=".NET Core, .NET Framework, migration, C#, ASP.NET, modernization">
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
+      <nav class="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#about">About</a>
+        <a href="../blog.html">Posts</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <main class="main-content">
+      <article class="blog-post">
+        <header class="post-header">
+          <p class="post-meta">October 28, 2025 • 10 min read</p>
+          <h1 class="post-title-full">From .NET Framework to .NET Core: A Migration Story</h1>
+        </header>
+
+        <div class="post-content">
+          <p>Migrating from .NET Framework to .NET Core (now just ".NET") isn't just a technical upgrade—it's a strategic decision that can unlock modern development practices, better performance, and cross-platform capabilities. I've led several of these migrations, and here's what I've learned.</p>
+
+          <h2>Why Migrate?</h2>
+          
+          <p>First, let's talk about why you should consider this migration:</p>
+
+          <ul>
+            <li><strong>Performance:</strong> .NET Core is significantly faster—we saw 30-50% performance improvements in most applications</li>
+            <li><strong>Cross-platform:</strong> Run on Linux containers, reducing infrastructure costs</li>
+            <li><strong>Modern tooling:</strong> Better CLI, improved package management, side-by-side versioning</li>
+            <li><strong>Active development:</strong> .NET Framework is in maintenance mode; all new features go to .NET</li>
+            <li><strong>Cloud-ready:</strong> Better suited for microservices and containerization</li>
+          </ul>
+
+          <h2>The Assessment Phase</h2>
+
+          <p>Before writing a single line of code, we spent time understanding what we were dealing with:</p>
+
+          <h3>Inventory Your Dependencies</h3>
+
+          <p>Use the .NET Portability Analyzer to scan your codebase. It will tell you:</p>
+          <ul>
+            <li>Which APIs aren't available in .NET Core</li>
+            <li>Third-party package compatibility</li>
+            <li>Platform-specific dependencies</li>
+          </ul>
+
+          <h3>Categorize Your Applications</h3>
+
+          <p>Not everything should be migrated at once. We grouped applications into:</p>
+
+          <ol>
+            <li><strong>Quick wins:</strong> Simple web APIs with minimal dependencies</li>
+            <li><strong>Medium complexity:</strong> MVC applications with some Windows-specific code</li>
+            <li><strong>Complex:</strong> Applications heavily dependent on .NET Framework features</li>
+            <li><strong>Don't migrate:</strong> Legacy apps scheduled for retirement</li>
+          </ol>
+
+          <h2>The Migration Process</h2>
+
+          <h3>Step 1: Upgrade to .NET Framework 4.8</h3>
+
+          <p>Before jumping to .NET Core, upgrade to the latest .NET Framework version. This surfaces compatibility issues early and gives you access to .NET Standard libraries.</p>
+
+          <h3>Step 2: Move to .NET Standard Libraries</h3>
+
+          <p>Extract business logic into .NET Standard 2.0 class libraries. These can be used by both .NET Framework and .NET Core, allowing for incremental migration.</p>
+
+          <pre><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;netstandard2.0&lt;/TargetFramework&gt;
+  &lt;/PropertyGroup&gt;
+&lt;/Project&gt;</code></pre>
+
+          <h3>Step 3: Migrate Supporting Projects First</h3>
+
+          <p>Start with class libraries, then move up to the application layer:</p>
+
+          <ol>
+            <li>Data access layer</li>
+            <li>Business logic layer</li>
+            <li>API/Web layer</li>
+          </ol>
+
+          <h3>Step 4: Update Project Files</h3>
+
+          <p>The new SDK-style project format is much cleaner:</p>
+
+          <pre><code>&lt;Project Sdk="Microsoft.NET.Sdk.Web"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+  &lt;/PropertyGroup&gt;
+&lt;/Project&gt;</code></pre>
+
+          <h2>Common Challenges and Solutions</h2>
+
+          <h3>Challenge 1: Configuration System</h3>
+
+          <p><strong>Problem:</strong> .NET Core uses a completely different configuration system (appsettings.json vs web.config)</p>
+
+          <p><strong>Solution:</strong></p>
+          <pre><code>// Old .NET Framework
+var setting = ConfigurationManager.AppSettings["MySetting"];
+
+// New .NET Core
+private readonly IConfiguration _config;
+var setting = _config["MySetting"];</code></pre>
+
+          <h3>Challenge 2: Dependency Injection</h3>
+
+          <p><strong>Problem:</strong> .NET Core has built-in DI; you might have been using Unity or Autofac</p>
+
+          <p><strong>Solution:</strong> Embrace the built-in DI container. It's lightweight and sufficient for most scenarios:</p>
+
+          <pre><code>// Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddScoped&lt;IMyService, MyService&gt;();
+    services.AddDbContext&lt;MyContext&gt;(options =&gt;
+        options.UseSqlServer(Configuration.GetConnectionString("Default")));
+}</code></pre>
+
+          <h3>Challenge 3: Entity Framework</h3>
+
+          <p><strong>Problem:</strong> Moving from EF6 to EF Core involves some breaking changes</p>
+
+          <p><strong>Solution:</strong> The good news is EF Core is mostly compatible. Main issues:</p>
+
+          <ul>
+            <li>Some LINQ queries need rewriting</li>
+            <li>Lazy loading requires explicit package</li>
+            <li>Some advanced features aren't available (yet)</li>
+          </ul>
+
+          <h3>Challenge 4: Windows-Specific Dependencies</h3>
+
+          <p><strong>Problem:</strong> Code using Windows registry, WCF, or System.Drawing</p>
+
+          <p><strong>Solution:</strong></p>
+          <ul>
+            <li>WCF: Use gRPC or REST APIs instead</li>
+            <li>System.Drawing: Use ImageSharp or SkiaSharp</li>
+            <li>Registry access: Rethink if necessary, or use Windows Compatibility Pack</li>
+          </ul>
+
+          <h2>Real-World Migration: Enterprise API</h2>
+
+          <p>Let me share a specific example. We had a large ASP.NET Web API application with these characteristics:</p>
+
+          <ul>
+            <li>200+ API endpoints</li>
+            <li>Entity Framework 6 with SQL Server</li>
+            <li>Custom authentication using OWIN</li>
+            <li>Autofac for dependency injection</li>
+            <li>Significant business logic in class libraries</li>
+          </ul>
+
+          <h3>Our Approach:</h3>
+
+          <ol>
+            <li><strong>Week 1:</strong> Created parallel .NET 8 project, migrated configuration</li>
+            <li><strong>Week 2-3:</strong> Migrated data access layer to EF Core</li>
+            <li><strong>Week 4:</strong> Converted business logic libraries to .NET Standard</li>
+            <li><strong>Week 5-6:</strong> Migrated API controllers, replaced OWIN auth with ASP.NET Core Identity</li>
+            <li><strong>Week 7:</strong> Comprehensive testing, performance benchmarking</li>
+            <li><strong>Week 8:</strong> Deployed to staging, gradual production rollout</li>
+          </ol>
+
+          <h3>Results:</h3>
+
+          <ul>
+            <li>45% improvement in response times</li>
+            <li>60% reduction in memory usage</li>
+            <li>Docker containerization enabled (now running on Linux)</li>
+            <li>Infrastructure costs reduced by 40%</li>
+          </ul>
+
+          <h2>Lessons Learned</h2>
+
+          <h3>1. Test Everything</h3>
+          <p>Have comprehensive automated tests before starting. We caught numerous subtle behavioral differences between .NET Framework and .NET Core.</p>
+
+          <h3>2. Don't Boil the Ocean</h3>
+          <p>Migrate incrementally. Use the Strangler Fig pattern—gradually replace old system with new.</p>
+
+          <h3>3. Update Your Skills</h3>
+          <p>ASP.NET Core introduces new patterns (middleware, hosted services, options pattern). Invest time learning these.</p>
+
+          <h3>4. Performance Test Early</h3>
+          <p>We found that while most code ran faster, some LINQ queries performed worse in EF Core and needed optimization.</p>
+
+          <h3>5. Embrace Modern Practices</h3>
+          <p>Don't just port the code—use this as an opportunity to modernize your architecture.</p>
+
+          <h2>Tools That Helped</h2>
+
+          <ul>
+            <li><strong>.NET Upgrade Assistant:</strong> Microsoft's tool for automated migration (saves tons of time)</li>
+            <li><strong>API Analyzer:</strong> Identifies compatibility issues</li>
+            <li><strong>BenchmarkDotNet:</strong> Performance comparison before/after</li>
+            <li><strong>Verify:</strong> Snapshot testing to ensure behavior consistency</li>
+          </ul>
+
+          <h2>When NOT to Migrate</h2>
+
+          <p>Be honest about these scenarios:</p>
+
+          <ul>
+            <li>Application is being retired within 12 months</li>
+            <li>Heavily dependent on WPF or Windows Forms</li>
+            <li>Uses obscure third-party libraries with no .NET Core version</li>
+            <li>Team lacks bandwidth or expertise</li>
+          </ul>
+
+          <h2>Final Thoughts</h2>
+
+          <p>Migrating from .NET Framework to .NET Core is a significant undertaking, but the benefits are real and substantial. Better performance, modern tooling, cloud-readiness, and a future-proof platform make it worthwhile.</p>
+
+          <p>Start small, learn as you go, and don't try to do everything at once. The path to modern .NET is a journey, not a sprint.</p>
+
+          <p>Have you gone through a .NET migration? What challenges did you face? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">I'd love to hear your experience.</a></p>
+        </div>
+
+        <footer class="post-footer">
+          <div class="post-tags">
+            <span class="tag">.NET Core</span>
+            <span class="tag">Migration</span>
+            <span class="tag">C#</span>
+            <span class="tag">ASP.NET</span>
+          </div>
+          <div class="post-nav">
+            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
+          </div>
+        </footer>
+      </article>
+    </main>
+
+    <aside class="sidebar">
+      <section class="sidebar-section">
+        <h3>Get in touch</h3>
+        <p>hasham87 [at] gmail [dot] com</p>
+      </section>
+
+      <section class="sidebar-section">
+        <h3>Follow me</h3>
+        <ul class="social-links">
+          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/yourusername" target="_blank">Twitter</a></li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h3>More Posts</h3>
+        <ul class="social-links">
+          <li><a href="building-scalable-cloud-solutions-aws.html">Scalable AWS Solutions</a></li>
+          <li><a href="art-of-devops-beyond-buzzwords.html">The Art of DevOps</a></li>
+          <li><a href="infrastructure-as-code-cloudformation.html">Infrastructure as Code</a></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# robots.txt for Personal Website & Blog
+
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Don't index template files
+Disallow: /blog/_template.html
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Common crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Note: Replace "yourdomain.com" with your actual domain
