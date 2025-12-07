@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Scalable Cloud Solutions with AWS - Hasham Ahmad</title>
+  <meta name="description" content="Exploring best practices for architecting cloud-native applications that scale seamlessly and remain cost-effective on AWS.">
+  <meta name="keywords" content="AWS, cloud architecture, scalability, Lambda, ECS, DevOps">
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
+      <nav class="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#about">About</a>
+        <a href="../blog.html">Posts</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <main class="main-content">
+      <article class="blog-post">
+        <header class="post-header">
+          <p class="post-meta">December 7, 2025 • 8 min read</p>
+          <h1 class="post-title-full">Building Scalable Cloud Solutions with AWS</h1>
+        </header>
+
+        <div class="post-content">
+          <p>Over the past decade, I've architected and deployed dozens of cloud-native applications on AWS. What started as simple EC2 instances has evolved into sophisticated serverless architectures, containerized workloads, and everything in between. Here's what I've learned about building systems that actually scale.</p>
+
+          <h2>Start with the Right Foundation</h2>
+          
+          <p>The biggest mistake I see teams make is trying to build "Netflix-scale" infrastructure from day one. You don't need it. What you do need is a foundation that can evolve. Here's my approach:</p>
+
+          <h3>Choose Your Compute Wisely</h3>
+          
+          <ul>
+            <li><strong>Lambda for event-driven workloads</strong> - Perfect for APIs, data processing, and scheduled tasks. Pay-per-use pricing is unbeatable for variable traffic.</li>
+            <li><strong>ECS/Fargate for stateful services</strong> - When you need containers but don't want to manage Kubernetes complexity.</li>
+            <li><strong>EC2 for specialized needs</strong> - Still the best choice for legacy apps, databases that need predictable performance, or workloads with specific compliance requirements.</li>
+          </ul>
+
+          <h3>Design for Failure</h3>
+
+          <p>The cloud isn't magical—things break. Design with that in mind:</p>
+
+          <ul>
+            <li>Use Auto Scaling Groups for EC2 instances</li>
+            <li>Deploy across multiple Availability Zones</li>
+            <li>Implement health checks and automated recovery</li>
+            <li>Design stateless applications where possible</li>
+          </ul>
+
+          <h2>Cost Optimization Isn't Optional</h2>
+
+          <p>I've seen AWS bills spiral out of control because teams didn't think about costs early. Here are my non-negotiables:</p>
+
+          <ul>
+            <li><strong>Tag everything</strong> - You can't optimize what you can't measure. Every resource should have tags for team, environment, and project.</li>
+            <li><strong>Use Reserved Instances/Savings Plans</strong> - For predictable workloads, you can save 50-70% compared to on-demand pricing.</li>
+            <li><strong>Set up CloudWatch billing alarms</strong> - Catch cost spikes before they become problems.</li>
+            <li><strong>Right-size your instances</strong> - Use AWS Compute Optimizer to identify oversized resources.</li>
+          </ul>
+
+          <h2>Infrastructure as Code Is Non-Negotiable</h2>
+
+          <p>Every production system I work on uses Infrastructure as Code. My tool of choice is CloudFormation (with occasional Terraform for multi-cloud scenarios). Benefits:</p>
+
+          <ul>
+            <li>Reproducible environments</li>
+            <li>Version control for infrastructure</li>
+            <li>Easier disaster recovery</li>
+            <li>Self-documenting architecture</li>
+          </ul>
+
+          <pre><code># Example CloudFormation snippet for a scalable API
+Resources:
+  APIFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: nodejs18.x
+      Handler: index.handler
+      ReservedConcurrentExecutions: 100
+      
+  APIGateway:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: ScalableAPI
+      ProtocolType: HTTP</code></pre>
+
+          <h2>Monitoring and Observability</h2>
+
+          <p>You can't fix what you can't see. My monitoring stack always includes:</p>
+
+          <ul>
+            <li><strong>CloudWatch Logs</strong> - Centralized logging with structured log formats</li>
+            <li><strong>CloudWatch Metrics</strong> - Custom metrics for business KPIs, not just system metrics</li>
+            <li><strong>X-Ray</strong> - Distributed tracing for debugging microservices</li>
+            <li><strong>CloudWatch Dashboards</strong> - Real-time visibility into system health</li>
+          </ul>
+
+          <h2>Security Best Practices</h2>
+
+          <p>Security should be baked in, not bolted on:</p>
+
+          <ul>
+            <li>Use IAM roles, never hardcode credentials</li>
+            <li>Enable CloudTrail for audit logs</li>
+            <li>Encrypt data at rest and in transit</li>
+            <li>Use VPCs and security groups to restrict network access</li>
+            <li>Regular security audits with AWS Security Hub</li>
+          </ul>
+
+          <h2>Real-World Example: Scaling a SaaS Platform</h2>
+
+          <p>Recently, I worked on a SaaS platform that went from 1,000 to 100,000 users in six months. Here's what made it possible:</p>
+
+          <ol>
+            <li><strong>API Gateway + Lambda</strong> - Handled variable traffic without managing servers</li>
+            <li><strong>DynamoDB</strong> - Auto-scaling NoSQL database that kept up with growth</li>
+            <li><strong>CloudFront</strong> - CDN for static assets, reducing origin load by 80%</li>
+            <li><strong>SQS + Lambda</strong> - Async processing for heavy background tasks</li>
+            <li><strong>ElastiCache</strong> - Redis for session management and caching</li>
+          </ol>
+
+          <p>Cost per user actually decreased as we scaled because we optimized the architecture early.</p>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>Start simple, evolve as needed</li>
+            <li>Design for failure from day one</li>
+            <li>Make cost optimization a continuous practice</li>
+            <li>Use Infrastructure as Code for everything</li>
+            <li>Invest in monitoring and observability</li>
+            <li>Never compromise on security</li>
+          </ul>
+
+          <p>Building scalable cloud solutions isn't about using the fanciest services—it's about choosing the right tools for your specific needs and building a solid foundation that can grow with you.</p>
+
+          <p>What's your experience with AWS? Any lessons learned you'd add? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">Let's connect on LinkedIn</a> and share notes.</p>
+        </div>
+
+        <footer class="post-footer">
+          <div class="post-tags">
+            <span class="tag">AWS</span>
+            <span class="tag">Cloud Architecture</span>
+            <span class="tag">Scalability</span>
+            <span class="tag">DevOps</span>
+          </div>
+          <div class="post-nav">
+            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
+          </div>
+        </footer>
+      </article>
+    </main>
+
+    <aside class="sidebar">
+      <section class="sidebar-section">
+        <h3>Get in touch</h3>
+        <p>hasham87 [at] gmail [dot] com</p>
+      </section>
+
+      <section class="sidebar-section">
+        <h3>Follow me</h3>
+        <ul class="social-links">
+          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/yourusername" target="_blank">Twitter</a></li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h3>More Posts</h3>
+        <ul class="social-links">
+          <li><a href="art-of-devops-beyond-buzzwords.html">The Art of DevOps</a></li>
+          <li><a href="dotnet-framework-to-core-migration.html">.NET Migration Story</a></li>
+          <li><a href="infrastructure-as-code-cloudformation.html">Infrastructure as Code</a></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

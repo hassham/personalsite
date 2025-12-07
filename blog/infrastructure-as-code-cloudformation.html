@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infrastructure as Code: My CloudFormation Journey - Hasham Ahmad</title>
+  <meta name="description" content="Why treating infrastructure as code changed everything. CloudFormation best practices, templates, and lessons learned.">
+  <meta name="keywords" content="Infrastructure as Code, IaC, CloudFormation, AWS, DevOps, automation">
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
+      <nav class="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#about">About</a>
+        <a href="../blog.html">Posts</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <main class="main-content">
+      <article class="blog-post">
+        <header class="post-header">
+          <p class="post-meta">September 10, 2025 • 9 min read</p>
+          <h1 class="post-title-full">Infrastructure as Code: My CloudFormation Journey</h1>
+        </header>
+
+        <div class="post-content">
+          <p>There's a moment in every cloud engineer's journey when infrastructure stops being a collection of resources you click together and becomes code you version, test, and deploy. For me, that moment came when I had to recreate a production environment after a catastrophic failure—and realized I had no idea what all the settings were.</p>
+
+          <p>That was my wake-up call. Since then, I've become a zealot for Infrastructure as Code (IaC), particularly AWS CloudFormation.</p>
+
+          <h2>Why Infrastructure as Code?</h2>
+          
+          <p>Let me be clear: if you're still provisioning infrastructure through web consoles, you're doing yourself a disservice. Here's why:</p>
+
+          <h3>1. Reproducibility</h3>
+          <p>Can you spin up an identical copy of your production environment in 15 minutes? With IaC, you can. Just run the same template in a different region or account.</p>
+
+          <h3>2. Version Control</h3>
+          <p>Your infrastructure changes should be tracked just like your code. Git history shows you exactly who changed what and when.</p>
+
+          <h3>3. Documentation</h3>
+          <p>Your CloudFormation templates ARE your documentation. They're always up-to-date because they're the source of truth.</p>
+
+          <h3>4. Testing</h3>
+          <p>You can validate templates before applying them, preventing costly mistakes in production.</p>
+
+          <h3>5. Disaster Recovery</h3>
+          <p>When (not if) something goes wrong, you can recreate your entire infrastructure quickly and reliably.</p>
+
+          <h2>CloudFormation vs. Terraform: The Debate</h2>
+
+          <p>People always ask: "Why CloudFormation instead of Terraform?" Here's my take:</p>
+
+          <h3>Choose CloudFormation when:</h3>
+          <ul>
+            <li>You're all-in on AWS</li>
+            <li>You want native integration with AWS services</li>
+            <li>You need drift detection built-in</li>
+            <li>You don't want to manage additional state</li>
+          </ul>
+
+          <h3>Choose Terraform when:</h3>
+          <ul>
+            <li>You're multi-cloud</li>
+            <li>You need more flexible programming capabilities</li>
+            <li>You want a larger ecosystem of providers</li>
+          </ul>
+
+          <p>I use both, but for pure AWS projects, CloudFormation is my go-to.</p>
+
+          <h2>Getting Started: Your First Template</h2>
+
+          <p>Let's build something practical—a simple web application stack:</p>
+
+          <pre><code>AWSTemplateFormatVersion: '2010-09-09'
+Description: Simple web application infrastructure
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+    Description: Environment name
+
+Resources:
+  # VPC
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName}-vpc
+
+  # Public Subnet
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs '']
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName}-public-subnet
+
+  # Application Load Balancer
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub ${EnvironmentName}-alb
+      Subnets:
+        - !Ref PublicSubnet
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+
+  # Security Group
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for load balancer
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  LoadBalancerDNS:
+    Description: DNS name of the load balancer
+    Value: !GetAtt LoadBalancer.DNSName
+    Export:
+      Name: !Sub ${EnvironmentName}-alb-dns</code></pre>
+
+          <h2>Best Practices I've Learned</h2>
+
+          <h3>1. Use Parameters Wisely</h3>
+          <p>Make your templates reusable across environments, but don't over-parameterize. Too many parameters make templates hard to use.</p>
+
+          <h3>2. Leverage Outputs and Exports</h3>
+          <p>Use stack outputs to share values between stacks:</p>
+
+          <pre><code>Outputs:
+  VPCId:
+    Value: !Ref VPC
+    Export:
+      Name: !Sub ${EnvironmentName}-vpc-id
+
+# In another stack:
+VpcId: !ImportValue dev-vpc-id</code></pre>
+
+          <h3>3. Organize with Nested Stacks</h3>
+          <p>Break large templates into logical components:</p>
+
+          <ul>
+            <li>network-stack.yaml (VPC, subnets, routing)</li>
+            <li>security-stack.yaml (security groups, IAM roles)</li>
+            <li>application-stack.yaml (EC2, ECS, Lambda)</li>
+            <li>database-stack.yaml (RDS, DynamoDB)</li>
+          </ul>
+
+          <h3>4. Use Stack Sets for Multi-Account</h3>
+          <p>Managing the same infrastructure across multiple AWS accounts? Stack Sets are your friend.</p>
+
+          <h3>5. Implement Change Sets</h3>
+          <p>Always preview changes before applying them:</p>
+
+          <pre><code>aws cloudformation create-change-set \
+  --stack-name my-stack \
+  --change-set-name my-change-set \
+  --template-body file://template.yaml
+
+aws cloudformation describe-change-set \
+  --change-set-name my-change-set \
+  --stack-name my-stack</code></pre>
+
+          <h2>Advanced Patterns</h2>
+
+          <h3>Custom Resources</h3>
+          <p>Sometimes you need to do things CloudFormation doesn't support natively. Custom resources backed by Lambda functions are the answer:</p>
+
+          <pre><code>CustomResource:
+  Type: Custom::MyCustomResource
+  Properties:
+    ServiceToken: !GetAtt CustomResourceFunction.Arn
+    SomeProperty: SomeValue</code></pre>
+
+          <h3>Macros and Transforms</h3>
+          <p>Use AWS SAM transform for serverless applications:</p>
+
+          <pre><code>Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get</code></pre>
+
+          <h2>Common Pitfalls</h2>
+
+          <h3>1. Circular Dependencies</h3>
+          <p>CloudFormation can't resolve circular references. If you hit this, you need to split into separate stacks.</p>
+
+          <h3>2. Resource Limits</h3>
+          <p>Templates have a 500-resource limit. Use nested stacks to work around this.</p>
+
+          <h3>3. Replacement vs. Update</h3>
+          <p>Some resource changes cause replacement (deletion + recreation). This can be destructive. Always check the documentation.</p>
+
+          <h3>4. Rollback Failures</h3>
+          <p>When a stack gets stuck in ROLLBACK_FAILED, you often need to manually fix resources before CloudFormation can continue.</p>
+
+          <h2>Real-World Example: Production Infrastructure</h2>
+
+          <p>Here's how I structured a recent production deployment:</p>
+
+          <ol>
+            <li><strong>foundation-stack:</strong> VPC, subnets, NAT gateways, VPN</li>
+            <li><strong>security-stack:</strong> IAM roles, security groups, KMS keys</li>
+            <li><strong>database-stack:</strong> RDS cluster, backup configuration</li>
+            <li><strong>application-stack:</strong> ECS cluster, task definitions, ALB</li>
+            <li><strong>monitoring-stack:</strong> CloudWatch dashboards, alarms, SNS topics</li>
+            <li><strong>pipeline-stack:</strong> CodePipeline, CodeBuild for CI/CD</li>
+          </ol>
+
+          <p>Each stack is independently deployable and can be updated without affecting others (mostly).</p>
+
+          <h2>Automation and CI/CD</h2>
+
+          <p>Your IaC should be in your CI/CD pipeline:</p>
+
+          <pre><code># .github/workflows/deploy-infrastructure.yml
+name: Deploy Infrastructure
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infrastructure/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - name: Deploy CloudFormation stack
+        run: |
+          aws cloudformation deploy \
+            --template-file infrastructure/template.yaml \
+            --stack-name my-infrastructure \
+            --capabilities CAPABILITY_IAM \
+            --parameter-overrides Environment=prod</code></pre>
+
+          <h2>Testing Your Infrastructure</h2>
+
+          <p>Yes, you should test your IaC:</p>
+
+          <ul>
+            <li><strong>cfn-lint:</strong> Static analysis of templates</li>
+            <li><strong>TaskCat:</strong> Multi-region testing</li>
+            <li><strong>InSpec:</strong> Compliance testing</li>
+            <li><strong>Integration tests:</strong> Deploy to test account, verify resources</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>Treat infrastructure like code—version it, test it, review it</li>
+            <li>Start small, then expand</li>
+            <li>Use parameters for reusability, but don't overdo it</li>
+            <li>Break large templates into logical stacks</li>
+            <li>Always use change sets to preview changes</li>
+            <li>Automate deployment through CI/CD</li>
+            <li>Document your templates (they're self-documenting, but comments help)</li>
+          </ul>
+
+          <p>Infrastructure as Code isn't just a best practice—it's the only sustainable way to manage cloud infrastructure at scale. The initial investment in learning pays dividends in reliability, speed, and peace of mind.</p>
+
+          <p>What's your IaC journey been like? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">Share your experiences with me!</a></p>
+        </div>
+
+        <footer class="post-footer">
+          <div class="post-tags">
+            <span class="tag">Infrastructure as Code</span>
+            <span class="tag">CloudFormation</span>
+            <span class="tag">AWS</span>
+            <span class="tag">DevOps</span>
+          </div>
+          <div class="post-nav">
+            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
+          </div>
+        </footer>
+      </article>
+    </main>
+
+    <aside class="sidebar">
+      <section class="sidebar-section">
+        <h3>Get in touch</h3>
+        <p>hasham87 [at] gmail [dot] com</p>
+      </section>
+
+      <section class="sidebar-section">
+        <h3>Follow me</h3>
+        <ul class="social-links">
+          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/yourusername" target="_blank">Twitter</a></li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h3>More Posts</h3>
+        <ul class="social-links">
+          <li><a href="building-scalable-cloud-solutions-aws.html">Scalable AWS Solutions</a></li>
+          <li><a href="art-of-devops-beyond-buzzwords.html">The Art of DevOps</a></li>
+          <li><a href="dotnet-framework-to-core-migration.html">.NET Migration Story</a></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

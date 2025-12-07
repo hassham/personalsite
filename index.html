@@ -3,118 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hasham Ahmad | Technology Professional</title>
+  <title>Hasham Ahmad</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">Hasham Ahmad</div>
-    <ul class="nav-links">
-      <li><a href="#landing">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <!-- <li><a href="#projects">Projects</a></li> -->
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#" target="_blank">Blog</a></li> <!-- https://yourblogurl.com -->
-    </ul>
-  </nav>
-  <section id="landing" class="section landing">
-    <div class="landing-content">
-      <img src="./profile.png" alt="Profile Photo" class="profile-img" />
-      <h1>Hasham Ahmad</h1>
-      <p class="tagline">Senior .NET Developer | 15+ Years Experience</p>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">Hasham Ahmad</h1>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="blog.html">Posts</a>
+      </nav>
     </div>
-  </section>
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>Hi, I’m Hasham — a solutions architect, cloud enthusiast, and part-time myth-buster (mainly when someone says "This will only take five minutes") with years of experience across the corporate world and service sector.</p>
+  </header>
 
-    <p>I specialize in building scalable, secure, and smart systems using both AWS and Azure, and have a deep appreciation for the magic of DevOps when done right. From automating CI/CD pipelines to designing cloud-native applications, I thrive at the intersection of tech and business — where real problems need real solutions (and fewer PowerPoint slides).</p>
-      
-    <p>Over the years, I’ve worked with startups trying to scale and enterprises trying to stay nimble. My toolkit includes everything from .NET development to infrastructure as code, from agile delivery to "How-did-you-even-think-of-that?" solutions.</p>
-      
-    <p>Outside the terminal window, I’m a proud dad to two little legends, who’ve taught me more about negotiation and chaos management than any workshop ever could. I live in sunny Sydney, stay curious, and believe the best tech solutions begin with listening — and maybe a bit of caffeine.</p>
-      
-    <p>If you're looking for someone who blends deep technical expertise with business insight, gets things done without drama, and even makes the occasional deployment feel fun — let’s connect.</p>
-  </section>
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="project">
-      <strong><a href="https://intellisms.com.au/" target="_blank">IntelliSMS – Enterprise SMS Gateway</a></strong>
-      <p>Contributed to the development of a scalable SMS platform offering features like SMS API, live chat, and multimedia messaging. Ensured seamless integration and high availability for enterprise clients.</p>
-      <p><strong>Technologies:</strong> .NET Core, RESTful APIs, Azure, Azure Webjobs</p>
-    </div>
-  </section>
-  <section id="skills" class="section">
-    <h2>Skills</h2>
-    <strong>🚀 Cloud & DevOps</strong>
-    <ul>
-      <li>AWS & Azure – Architecting scalable, secure, and cost-effective cloud solutions</li>
-      <li>CI/CD Pipelines – Jenkins, GitHub Actions, Bitbucket Pipelines, Azure DevOps</li>
-      <li>Infrastructure as Code – CloudFormation, Bicep, Terraform (still friends)</li>
-      <li>Monitoring & Logging – CloudWatch, Application Insights, ELK stack</li>
-    </ul>
-    <strong>💻 Software Development</strong>
-    <ul>
-      <li>.NET Stack – C#, ASP.NET MVC, Web API, Entity Framework</li>
-      <li>Frontend – HTML, CSS, JavaScript, jQuery, Bootstrap (and an evolving relationship with Angular)</li>
-      <li>APIs & Integration – REST, GraphQL, third-party integrations, custom connectors</li>
-      <li>Secure Coding – OWASP-aware, token-based auth (JWT, OAuth), Identity Framework</li>
-    </ul>
-    <strong>🧠 Soft Skills (a.k.a. Tech Superpowers)</strong>
-    <ul>
-      <li>Translating business jargon into technical gold</li>
-      <li>Mentoring junior devs without sounding like Gandalf</li>
-      <li>Bridging the gap between developers, stakeholders, and “the people upstairs”</li>
-      <li>Delivering under pressure (with documentation!)</li>
-      <li>Making dry stand-ups... slightly less dry</li>
-    </ul>
-  </section>
-  <section id="experience" class="section">
-    <h2>Experience</h2>
-    <div class="experience-list">
-      <div class="experience-item">
-        <h3>Senior Solutions Architect & DevOps Consultant</h3>
-        <span class="years">2024–Present</span>
-        <p>FUJIFILM Data Management Solutions</p>
-        <ul>
-          <li>Cloud Architecture: Designed and implemented scalable, secure, and cost-effective solutions on both AWS and Azure, catering to diverse business needs.</li>
-          <li>DevOps Implementation: Established robust CI/CD pipelines using tools like Jenkins, GitHub Actions, and Azure DevOps, significantly reducing deployment times and increasing reliability.</li>
-          <li>Infrastructure as Code: Automated infrastructure provisioning and management using CloudFormation, Terraform, and Bicep, enhancing consistency and reducing manual errors.</li>
-          <li>Monitoring & Logging: Integrated comprehensive monitoring solutions with CloudWatch, Application Insights, and the ELK stack to ensure system reliability and performance.
-          <li>Cross-Functional Collaboration: Acted as a liaison between technical teams and business stakeholders, translating complex requirements into actionable solutions.</li>
+  <div class="page-wrapper">
+    <main class="main-content">
+      <section class="hero">
+        <h1 class="hero-title">Well, hi there.</h1>
+      </section>
+
+      <section class="intro">
+        <p>I'm Hasham — a solutions architect, cloud enthusiast, and part-time myth-buster (mainly when someone says "This will only take five minutes") with years of experience across the corporate world and service sector.</p>
+
+        <p>I specialize in building scalable, secure, and smart systems using both AWS and Azure, and have a deep appreciation for the magic of DevOps when done right. From automating CI/CD pipelines to designing cloud-native applications, I thrive at the intersection of tech and business — where real problems need real solutions (and fewer PowerPoint slides).</p>
+        
+        <p>I'm the Senior Solutions Architect & DevOps Consultant at <a href="https://www.fujifilm.com/fbau/en" target="_blank">FUJIFILM Data Management Solutions</a>. We're building cutting-edge data management solutions that help organizations transform their operations. I'm previously a Full-Stack .NET Developer and Technical Lead, working across Karachi, Dubai, and Sydney.</p>
+
+        <p>Over the years, I've worked with startups trying to scale and enterprises trying to stay nimble. My toolkit includes everything from .NET development to infrastructure as code, from agile delivery to "How-did-you-even-think-of-that?" solutions.</p>
+        
+        <p>Outside the terminal window, I'm a proud dad to two little legends, who've taught me more about negotiation and chaos management than any workshop ever could. I live in sunny Sydney, stay curious, and believe the best tech solutions begin with listening — and maybe a bit of caffeine.</p>
+        
+        <p><a href="blog.html">Check out my latest posts →</a></p>
+      </section>
+    </main>
+
+    <aside class="sidebar">
+      <section class="sidebar-section">
+        <h3>Get in touch</h3>
+        <p>hasham87 [at] gmail [dot] com</p>
+      </section>
+
+      <section class="sidebar-section">
+        <h3>Follow me</h3>
+        <ul class="social-links">
+          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/yourusername" target="_blank">Twitter</a></li>
         </ul>
-      </div>
-      <div class="experience-item">
-        <h3>Full-Stack .NET Developer / Technical Lead</h3>
-        <span class="years">2009–2024</span>
-        <p>Various Software Houses & Product Teams, Karachi, Dubai & Sydney</p>
-        <ul>
-          <li>Application Development: Developed enterprise-level web applications using ASP.NET MVC, C#, and Entity Framework, delivering robust and maintainable codebases.</li>
-          <li>Frontend Development: Crafted responsive and user-friendly interfaces with HTML, CSS, JavaScript, jQuery, and Bootstrap, enhancing user experience.</li>
-          <li>API Integration: Seamlessly integrated third-party APIs and services, ensuring smooth interoperability and data exchange.</li>
-          <li>Team Leadership: Led development teams, mentoring junior developers, and promoting best practices in coding standards and agile methodologies.</li>
-          <li>Version Control & CI/CD: Introduced and managed Git workflows and continuous integration pipelines, streamlining development processes.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <!-- <section id="projects" class="section">
-    <h2>Projects & Portfolio</h2>
-    <div class="project-list">
-      <div class="project-item">
-        <h4>Project Title</h4>
-        <p>Short description of project, technology stack used, challenges solved.</p>
-      </div>
-    </div>
-  </section> -->
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:hasham87@gmail.com">hasham87@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">hashamahmad</a></p>
-    <p>GitHub: <a href="https://github.com/hassham" target="_blank">hassham</a></p>
-  </section>
+      </section>
+
+      <section id="about" class="sidebar-section">
+        <h3>About</h3>
+        <p>Solutions Architect and DevOps enthusiast based in Sydney. 15+ years building and scaling software systems.</p>
+        <p><a href="#skills">Skills & Expertise →</a></p>
+      </section>
+
+      <section id="skills" class="sidebar-section skills-section" style="display: none;">
+        <h3>Skills & Expertise</h3>
+        <div class="skill-category">
+          <h4>Cloud & DevOps</h4>
+          <ul>
+            <li>AWS & Azure Architecture</li>
+            <li>CI/CD Pipelines</li>
+            <li>Infrastructure as Code</li>
+            <li>CloudWatch, App Insights</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4>Development</h4>
+          <ul>
+            <li>.NET Core, C#, ASP.NET</li>
+            <li>RESTful APIs</li>
+            <li>Entity Framework</li>
+            <li>JavaScript, HTML, CSS</li>
+          </ul>
+        </div>
+        <p><a href="#about" class="back-link">← Back</a></p>
+      </section>
+    </aside>
+  </div>
+
   <script src="./script.js"></script>
 </body>
 </html>
+    
