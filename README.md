@@ -186,4 +186,4 @@ See the LICENSE file for details.
 
 ---
 
-Built with ❤️ using plain HTML, CSS, and JavaScript. No frameworks, no build tools, just simple, fast, and effective.
+Built with plain HTML, CSS, and JavaScript. No frameworks, no build tools, just simple, fast, and effective.
