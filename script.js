@@ -1,50 +1,48 @@
-// Skills section toggle functionality
-document.addEventListener('DOMContentLoaded', function() {
-  // Highlight active navigation link
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.main-nav a');
-  
-  navLinks.forEach(link => {
-    const linkPage = link.getAttribute('href').split('/').pop().split('#')[0];
-    if (linkPage === currentPage || 
-        (currentPage === '' && linkPage === 'index.html') ||
-        (currentPage.includes('blog/') && linkPage === 'blog.html')) {
-      link.classList.add('active');
-    }
-  });
-  
-  const aboutSection = document.querySelector('#about');
-  const skillsSection = document.querySelector('#skills');
-  
-  // Handle clicks on "Skills & Expertise" link
-  document.addEventListener('click', function(e) {
-    if (e.target.getAttribute('href') === '#skills') {
-      e.preventDefault();
-      if (aboutSection) aboutSection.style.display = 'none';
-      if (skillsSection) skillsSection.style.display = 'block';
-    }
-    
-    // Handle clicks on "Back" link
-    if (e.target.getAttribute('href') === '#about' || e.target.classList.contains('back-link')) {
-      e.preventDefault();
-      if (skillsSection) skillsSection.style.display = 'none';
-      if (aboutSection) aboutSection.style.display = 'block';
-    }
-  });
-  
-  // Smooth scroll for navigation links
-  const navLinksWithHash = document.querySelectorAll('.main-nav a[href^="#"]');
-  navLinksWithHash.forEach(link => {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        e.preventDefault();
-        window.scrollTo({
-          top: targetSection.offsetTop - 100,
-          behavior: 'smooth'
-        });
-      }
+document.addEventListener('DOMContentLoaded', () => {
+  const page = document.body.dataset.page;
+  const activeLink = document.querySelector(`[data-nav="${page}"]`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+    activeLink.setAttribute('aria-current', 'page');
+  }
+
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.main-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
     });
+
+    nav.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  document.querySelectorAll('[data-current-year]').forEach((element) => {
+    element.textContent = new Date().getFullYear();
   });
+
+  const contactForm = document.querySelector('[data-contact-form]');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(contactForm);
+      const name = data.get('name') || 'Website visitor';
+      const email = data.get('email') || '';
+      const organisation = data.get('organisation') || 'Not provided';
+      const topic = data.get('topic') || 'General enquiry';
+      const message = data.get('message') || '';
+      const subject = encodeURIComponent(`Website enquiry: ${topic}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nOrganisation: ${organisation}\nTopic: ${topic}\n\n${message}`
+      );
+      const status = contactForm.querySelector('[data-form-status]');
+      if (status) {
+        status.textContent = 'Opening your email application with the message prepared.';
+      }
+      window.location.href = `mailto:hasham87@gmail.com?subject=${subject}&body=${body}`;
+    });
+  }
 });

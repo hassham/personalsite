@@ -1,27 +1,27 @@
 ---
-permalink: blog.html
+permalink: work.html
 ---
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Writing | Hasham Ahmad</title>
-  <meta name="description" content="Practical notes from Hasham Ahmad on applied AI, cloud architecture, software modernization, DevOps and technical leadership.">
+  <title>Selected Work | Hasham Ahmad</title>
+  <meta name="description" content="Selected cloud architecture, enterprise modernization, integration and technical leadership experience from Hasham Ahmad.">
   <meta name="theme-color" content="#fbfaf7"><link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="personal.css">
   {% include "analytics.njk" %}
 </head>
-<body data-page="insights">
+<body data-page="work">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header"><div class="container"><a class="brand" href="index.html" aria-label="Hasham Ahmad, home"><span class="brand-mark" aria-hidden="true">HA</span><span class="brand-text">Hasham Ahmad</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation">Menu</button><nav class="main-nav" id="main-nav" aria-label="Main navigation"><a href="index.html" data-nav="home">Home</a><a href="work.html" data-nav="work">Work</a><a href="blog.html" data-nav="insights">Writing</a><a href="about.html" data-nav="about">About</a><a class="nav-cta" href="contact.html" data-nav="contact">Say hello</a></nav></div></header>
   <main id="main-content">
-    <section class="page-hero"><div class="container"><p class="eyebrow">Writing</p><h1>Things I’m learning, building, and thinking through.</h1><p>Notes on cloud architecture, modernizing software, delivery, and where AI is genuinely useful. Writing helps me make an idea clearer—and hopefully makes it useful to someone else too.</p></div></section>
-    <section class="section-compact"><div class="container"><div class="posts-section">
-      {% for post in collections.publishedPosts %}
-      <article class="post-card"><p class="post-meta">{{ post.data.category }} · {{ post.data.dateDisplay }}</p><h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2><p class="post-excerpt">{{ post.data.description }}</p><a class="read-more" href="{{ post.url }}">Read article →</a></article>
+    <section class="page-hero"><div class="container"><p class="eyebrow">Some of my work</p><h1>A few things I’ve helped build, modernize, and keep moving.</h1><p>Much of my work sits inside private enterprise systems, so these are plain-language snapshots of the challenges and the part I played.</p></div></section>
+    <section class="section-compact"><div class="container work-detail-grid">
+      {% for item in collections.workItems %}
+      <article class="work-detail" id="{{ item.data.slug }}"><div><p class="work-meta">{{ item.data.organisation }} · {{ item.data.period }}</p><h2>{{ item.data.title }}</h2></div><div class="work-detail-content"><p>{{ item.data.summary }}</p><div class="work-facts">{% for fact in item.data.facts %}<div class="work-fact"><strong>{{ fact.label }}</strong><span>{{ fact.text }}</span></div>{% endfor %}</div></div></article>
       {% endfor %}
-    </div></div></section>
-    <section class="section-compact"><div class="container"><div class="cta-panel"><p class="eyebrow">Keep the conversation going</p><h2>Thinking through something similar?</h2><p>Send me a note. I read every message and I’ll reply myself.</p><a class="btn btn-primary" href="contact.html">Say hello →</a></div></div></section>
+    </div></section>
+    <section class="section-compact"><div class="container"><div class="cta-panel"><p class="eyebrow">Something familiar?</p><h2>If you’re working through a similar problem, I’d be happy to hear about it.</h2><p>A useful first conversation is simply about the context, the constraint, and what you’re hoping to change.</p><a class="btn btn-primary" href="contact.html">Say hello →</a></div></div></section>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><strong>Hasham Ahmad</strong><p>Software engineer, pragmatic solutions architect, and always curious about a better way to build.</p></div><nav class="footer-links" aria-label="Footer navigation"><strong>Explore</strong><a href="work.html">Work</a><a href="blog.html">Writing</a><a href="about.html">About</a></nav><div class="footer-links"><strong>Connect</strong><a href="mailto:hasham87@gmail.com">Email</a><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/hassham" target="_blank" rel="noopener noreferrer">GitHub</a></div></div><div class="footer-bottom"><span>© <span data-current-year>2026</span> Hasham Ahmad</span><span>Made in Sydney, Australia</span></div></div></footer>
   <script src="script.js"></script>
