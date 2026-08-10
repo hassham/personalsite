@@ -1,43 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Art of DevOps: Beyond the Buzzwords - Hasham Ahmad</title>
-  <meta name="description" content="DevOps isn't just about tools—it's about culture, communication, and continuous improvement. Real-world insights on making DevOps work.">
-  <meta name="keywords" content="DevOps, CI/CD, culture, automation, continuous improvement">
-  <link rel="stylesheet" href="../styles.css" />
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-306RQ1H12G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-306RQ1H12G');
-  </script>
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
-      <nav class="main-nav">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#about">About</a>
-        <a href="../blog.html">Posts</a>        <a href="../gallery.html">Gallery</a>      </nav>
-    </div>
-  </header>
-
-  <div class="page-wrapper">
-    <main class="main-content">
-      <article class="blog-post">
-        <header class="post-header">
-          <p class="post-meta">November 15, 2025 • 7 min read</p>
-          <h1 class="post-title-full">The Art of DevOps: Beyond the Buzzwords</h1>
-        </header>
-
-        <div class="post-content">
-          <p>Everyone talks about DevOps. Most people get it wrong. After years of implementing DevOps practices across different organizations—from startups to enterprises—I've learned that the hardest part isn't the tools. It's the culture.</p>
+---
+title: "The Art of DevOps: Beyond the Buzzwords"
+slug: art-of-devops-beyond-buzzwords
+description: "Why DevOps depends on culture, communication and continuous improvement as much as it depends on tools and automation."
+category: "Delivery"
+date: 2025-11-15
+dateDisplay: "November 15, 2025"
+readTime: "7 min read"
+published: true
+topicTags:
+  - "DevOps"
+  - "CI/CD"
+  - "Culture"
+  - "Automation"
+---
+<p class="article-note">This is an educational technical note. Example scenarios and figures are illustrative unless explicitly identified as measured production results.</p>
+          <p>Everyone talks about DevOps, but the hardest part is rarely the tooling. Across engineering and technical leadership roles, the recurring challenge is culture: how teams share ownership, communicate and learn from production.</p>
 
           <h2>What DevOps Actually Is</h2>
           
@@ -108,10 +85,10 @@
 
           <h2>Real-World Implementation</h2>
 
-          <p>Let me share a recent transformation I led at an enterprise client. When I started:</p>
+          <p>Consider an illustrative enterprise transformation starting from these conditions:</p>
 
           <ul>
-            <li>Deployments took 3 weeks and required 15 people</li>
+            <li>Deployments were slow and coordination-heavy</li>
             <li>Production incidents occurred 2-3 times per week</li>
             <li>Development and operations teams didn't talk to each other</li>
             <li>No automated testing</li>
@@ -127,11 +104,11 @@
             <li><strong>Month 4:</strong> Full monitoring stack with CloudWatch and custom dashboards</li>
           </ol>
 
-          <p>Results after 6 months:</p>
+          <p>Six-month improvement targets might include:</p>
 
           <ul>
             <li>Deployments happen multiple times per day</li>
-            <li>Production incidents reduced by 80%</li>
+            <li>Fewer production incidents</li>
             <li>Mean time to recovery (MTTR) down from hours to minutes</li>
             <li>Developer satisfaction scores improved significantly</li>
           </ul>
@@ -175,48 +152,5 @@
 
           <p>The art of DevOps isn't about being perfect—it's about being better than yesterday. Start somewhere, iterate, and keep improving.</p>
 
-          <p>What's your DevOps journey been like? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">I'd love to hear your stories.</a></p>
-        </div>
+          <p>What's your DevOps journey been like? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank" rel="noopener noreferrer">I'd love to hear your stories.</a></p>
 
-        <footer class="post-footer">
-          <div class="post-tags">
-            <span class="tag">DevOps</span>
-            <span class="tag">CI/CD</span>
-            <span class="tag">Culture</span>
-            <span class="tag">Automation</span>
-          </div>
-          <div class="post-nav">
-            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
-          </div>
-        </footer>
-      </article>
-    </main>
-
-    <aside class="sidebar">
-      <section class="sidebar-section">
-        <h3>Get in touch</h3>
-        <p>hasham87@gmail.com</p>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>Follow me</h3>
-        <ul class="social-links">
-          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
-        </ul>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>More Posts</h3>
-        <ul class="social-links">
-          <li><a href="building-scalable-cloud-solutions-aws.html">Scalable AWS Solutions</a></li>
-          <li><a href="dotnet-framework-to-core-migration.html">.NET Migration Story</a></li>
-          <li><a href="infrastructure-as-code-cloudformation.html">Infrastructure as Code</a></li>
-        </ul>
-      </section>
-    </aside>
-  </div>
-
-  <script src="../script.js"></script>
-</body>
-</html>

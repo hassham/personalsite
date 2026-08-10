@@ -1,50 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>From .NET Framework to .NET Core: A Migration Story - Hasham Ahmad</title>
-  <meta name="description" content="Real-world lessons from migrating enterprise applications to modern .NET. Challenges, solutions, and what I wish I'd known.">
-  <meta name="keywords" content=".NET Core, .NET Framework, migration, C#, ASP.NET, modernization">
-  <link rel="stylesheet" href="../styles.css" />
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-306RQ1H12G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-306RQ1H12G');
-  </script>
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
-      <nav class="main-nav">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#about">About</a>
-        <a href="../blog.html">Posts</a>        <a href="../gallery.html">Gallery</a>      </nav>
-    </div>
-  </header>
-
-  <div class="page-wrapper">
-    <main class="main-content">
-      <article class="blog-post">
-        <header class="post-header">
-          <p class="post-meta">October 28, 2025 • 10 min read</p>
-          <h1 class="post-title-full">From .NET Framework to .NET Core: A Migration Story</h1>
-        </header>
-
-        <div class="post-content">
-          <p>Migrating from .NET Framework to .NET Core (now just ".NET") isn't just a technical upgrade—it's a strategic decision that can unlock modern development practices, better performance, and cross-platform capabilities. I've led several of these migrations, and here's what I've learned.</p>
+---
+title: "From .NET Framework to Modern .NET"
+slug: dotnet-framework-to-core-migration
+description: "Practical lessons for moving enterprise applications from .NET Framework to modern .NET while managing dependencies, risk and delivery."
+category: "Modernization"
+date: 2025-10-28
+dateDisplay: "October 28, 2025"
+readTime: "10 min read"
+published: true
+topicTags:
+  - ".NET"
+  - "Modernization"
+  - "Migration"
+  - "Enterprise software"
+---
+<p class="article-note">This is an educational technical note. Example scenarios and figures are illustrative unless explicitly identified as measured production results.</p>
+          <p>Migrating from .NET Framework to modern .NET isn't just a technical upgrade—it is a strategic decision that can unlock modern development practices, better performance and cross-platform capabilities. This article outlines a practical migration framework.</p>
 
           <h2>Why Migrate?</h2>
           
           <p>First, let's talk about why you should consider this migration:</p>
 
           <ul>
-            <li><strong>Performance:</strong> .NET Core is significantly faster—we saw 30-50% performance improvements in most applications</li>
+            <li><strong>Performance:</strong> Modern .NET can offer meaningful runtime and resource-efficiency improvements, depending on the workload</li>
             <li><strong>Cross-platform:</strong> Run on Linux containers, reducing infrastructure costs</li>
             <li><strong>Modern tooling:</strong> Better CLI, improved package management, side-by-side versioning</li>
             <li><strong>Active development:</strong> .NET Framework is in maintenance mode; all new features go to .NET</li>
@@ -189,10 +166,10 @@ public void ConfigureServices(IServiceCollection services)
           <h3>Results:</h3>
 
           <ul>
-            <li>45% improvement in response times</li>
-            <li>60% reduction in memory usage</li>
+            <li>Improved response times</li>
+            <li>Lower memory usage</li>
             <li>Docker containerization enabled (now running on Linux)</li>
-            <li>Infrastructure costs reduced by 40%</li>
+            <li>Lower infrastructure requirements</li>
           </ul>
 
           <h2>Lessons Learned</h2>
@@ -238,48 +215,5 @@ public void ConfigureServices(IServiceCollection services)
 
           <p>Start small, learn as you go, and don't try to do everything at once. The path to modern .NET is a journey, not a sprint.</p>
 
-          <p>Have you gone through a .NET migration? What challenges did you face? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">I'd love to hear your experience.</a></p>
-        </div>
+          <p>Have you gone through a .NET migration? What challenges did you face? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank" rel="noopener noreferrer">I'd love to hear your experience.</a></p>
 
-        <footer class="post-footer">
-          <div class="post-tags">
-            <span class="tag">.NET Core</span>
-            <span class="tag">Migration</span>
-            <span class="tag">C#</span>
-            <span class="tag">ASP.NET</span>
-          </div>
-          <div class="post-nav">
-            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
-          </div>
-        </footer>
-      </article>
-    </main>
-
-    <aside class="sidebar">
-      <section class="sidebar-section">
-        <h3>Get in touch</h3>
-        <p>hasham87@gmail.com</p>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>Follow me</h3>
-        <ul class="social-links">
-          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
-        </ul>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>More Posts</h3>
-        <ul class="social-links">
-          <li><a href="building-scalable-cloud-solutions-aws.html">Scalable AWS Solutions</a></li>
-          <li><a href="art-of-devops-beyond-buzzwords.html">The Art of DevOps</a></li>
-          <li><a href="infrastructure-as-code-cloudformation.html">Infrastructure as Code</a></li>
-        </ul>
-      </section>
-    </aside>
-  </div>
-
-  <script src="../script.js"></script>
-</body>
-</html>

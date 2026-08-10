@@ -1,42 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infrastructure as Code: My CloudFormation Journey - Hasham Ahmad</title>
-  <meta name="description" content="Why treating infrastructure as code changed everything. CloudFormation best practices, templates, and lessons learned.">
-  <meta name="keywords" content="Infrastructure as Code, IaC, CloudFormation, AWS, DevOps, automation">
-  <link rel="stylesheet" href="../styles.css" />
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-306RQ1H12G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-306RQ1H12G');
-  </script>
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
-      <nav class="main-nav">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#about">About</a>
-        <a href="../blog.html">Posts</a>        <a href="../gallery.html">Gallery</a>      </nav>
-    </div>
-  </header>
-
-  <div class="page-wrapper">
-    <main class="main-content">
-      <article class="blog-post">
-        <header class="post-header">
-          <p class="post-meta">September 10, 2025 • 9 min read</p>
-          <h1 class="post-title-full">Infrastructure as Code: My CloudFormation Journey</h1>
-        </header>
-
-        <div class="post-content">
+---
+title: "Infrastructure as Code with CloudFormation"
+slug: infrastructure-as-code-cloudformation
+description: "CloudFormation practices and lessons for building repeatable, reviewable and safer AWS infrastructure through code."
+category: "Cloud delivery"
+date: 2025-09-10
+dateDisplay: "September 10, 2025"
+readTime: "9 min read"
+published: true
+topicTags:
+  - "AWS"
+  - "CloudFormation"
+  - "Infrastructure as Code"
+  - "DevOps"
+---
+<p class="article-note">This is an educational technical note. Example scenarios and figures are illustrative unless explicitly identified as measured production results.</p>
           <p>There's a moment in every cloud engineer's journey when infrastructure stops being a collection of resources you click together and becomes code you version, test, and deploy. For me, that moment came when I had to recreate a production environment after a catastrophic failure—and realized I had no idea what all the settings were.</p>
 
           <p>That was my wake-up call. Since then, I've become a zealot for Infrastructure as Code (IaC), particularly AWS CloudFormation.</p>
@@ -307,48 +284,5 @@ jobs:
 
           <p>Infrastructure as Code isn't just a best practice—it's the only sustainable way to manage cloud infrastructure at scale. The initial investment in learning pays dividends in reliability, speed, and peace of mind.</p>
 
-          <p>What's your IaC journey been like? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">Share your experiences with me!</a></p>
-        </div>
+          <p>What's your IaC journey been like? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank" rel="noopener noreferrer">Share your experiences with me!</a></p>
 
-        <footer class="post-footer">
-          <div class="post-tags">
-            <span class="tag">Infrastructure as Code</span>
-            <span class="tag">CloudFormation</span>
-            <span class="tag">AWS</span>
-            <span class="tag">DevOps</span>
-          </div>
-          <div class="post-nav">
-            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
-          </div>
-        </footer>
-      </article>
-    </main>
-
-    <aside class="sidebar">
-      <section class="sidebar-section">
-        <h3>Get in touch</h3>
-        <p>hasham87@gmail.com</p>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>Follow me</h3>
-        <ul class="social-links">
-          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
-        </ul>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>More Posts</h3>
-        <ul class="social-links">
-          <li><a href="building-scalable-cloud-solutions-aws.html">Scalable AWS Solutions</a></li>
-          <li><a href="art-of-devops-beyond-buzzwords.html">The Art of DevOps</a></li>
-          <li><a href="dotnet-framework-to-core-migration.html">.NET Migration Story</a></li>
-        </ul>
-      </section>
-    </aside>
-  </div>
-
-  <script src="../script.js"></script>
-</body>
-</html>

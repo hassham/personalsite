@@ -1,49 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Creating a Brochure from a URL Using LLM - Hasham Ahmad</title>
-  <meta name="description" content="Learn how to leverage Large Language Models to automatically generate professional brochures from website content. A practical guide with code examples.">
-  <meta name="keywords" content="LLM, AI, brochure generation, web scraping, GPT, automation, content extraction">
-  <link rel="stylesheet" href="../styles.css" />
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-306RQ1H12G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-306RQ1H12G');
-  </script>
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
-      <nav class="main-nav">
-        <a href="../index.html">Home</a>
-        <a href="../about.html">About</a>
-        <a href="../blog.html">Posts</a>
-        <a href="../gallery.html">Gallery</a>
-      </nav>
-    </div>
-  </header>
-
-  <div class="page-wrapper">
-    <main class="main-content">
-      <article class="blog-post">
-        <header class="post-header">
-          <p class="post-meta">December 14, 2025 • 12 min read</p>
-          <h1 class="post-title-full">Creating a Brochure from a URL Using LLM</h1>
-        </header>
-
-        <div class="post-content">
+---
+title: "Creating a Brochure from a URL Using an LLM"
+slug: creating-brochure-from-url-using-llm
+description: "A practical automation pattern combining web extraction, structured prompts and document generation to create a brochure from website content."
+category: "Applied AI"
+date: 2025-12-14
+dateDisplay: "December 14, 2025"
+readTime: "12 min read"
+published: true
+topicTags:
+  - "AI"
+  - "LLMs"
+  - "Automation"
+  - "Document generation"
+---
+<p class="article-note">This is an educational technical note. Example scenarios and figures are illustrative unless explicitly identified as measured production results.</p>
           <p>Ever needed to create a professional brochure from a company's website but dreaded the manual copy-paste process? Large Language Models (LLMs) have made this task remarkably simple. In this guide, I'll show you how to automatically extract website content and generate a polished brochure using AI.</p>
 
           <h2>Why This Matters</h2>
           
-          <p>In my consulting work, I often need to quickly understand a client's business and create presentation materials. Manually browsing websites, extracting key information, and formatting brochures is time-consuming. With LLMs, we can:</p>
+          <p>A common consulting task is quickly understanding a business and creating clear presentation material. Manually browsing websites, extracting key information and formatting brochures is time-consuming. With LLMs, we can:</p>
 
           <ul>
             <li><strong>Save hours of manual work</strong> - Automate content extraction and formatting</li>
@@ -561,52 +536,7 @@ def export_to_pdf(markdown_content, output_file):
 
           <p>The key is combining the right tools—web scraping for data collection, LLMs for intelligent analysis, and good old-fashioned programming for orchestration. Start with the basic implementation I've shown here, then customize it for your specific needs.</p>
 
-          <p>I've used variations of this approach for everything from competitive analysis reports to client onboarding materials, and it's saved countless hours while improving consistency. Give it a try and let me know what you create!</p>
+          <p>Variations of this pattern can support competitive analysis, onboarding material and other repeatable content workflows. Treat generated material as a first draft and keep a human review step before publication.</p>
 
-          <p>Have you automated content creation with LLMs? What challenges did you face? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">Let's connect and share experiences!</a></p>
-        </div>
+          <p>Have you automated content creation with LLMs? What challenges did you face? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank" rel="noopener noreferrer">Let's connect and share experiences!</a></p>
 
-        <footer class="post-footer">
-          <div class="post-tags">
-            <span class="tag">LLM</span>
-            <span class="tag">AI</span>
-            <span class="tag">Automation</span>
-            <span class="tag">Python</span>
-            <span class="tag">Web Scraping</span>
-          </div>
-          <div class="post-nav">
-            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
-          </div>
-        </footer>
-      </article>
-    </main>
-
-    <aside class="sidebar">
-      <section class="sidebar-section">
-        <h3>Get in touch</h3>
-        <p>hasham87@gmail.com</p>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>Follow me</h3>
-        <ul class="social-links">
-          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
-        </ul>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>More Posts</h3>
-        <ul class="social-links">
-          <li><a href="building-scalable-cloud-solutions-aws.html">Scalable AWS Solutions</a></li>
-          <li><a href="art-of-devops-beyond-buzzwords.html">The Art of DevOps</a></li>
-          <li><a href="dotnet-framework-to-core-migration.html">.NET Migration Story</a></li>
-          <li><a href="infrastructure-as-code-cloudformation.html">Infrastructure as Code</a></li>
-        </ul>
-      </section>
-    </aside>
-  </div>
-
-  <script src="../script.js"></script>
-</body>
-</html>

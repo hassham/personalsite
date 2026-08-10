@@ -1,101 +1,171 @@
-<!DOCTYPE html>
+---
+permalink: index.html
+---
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hasham Ahmad</title>
-  <link rel="stylesheet" href="./styles.css" />
-  
-  <!-- Google Analytics -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hasham Ahmad | Pragmatic Solutions Architect</title>
+  <meta name="description" content="Hasham Ahmad helps founders, technology partners and enterprise teams modernize software, design reliable cloud platforms and apply AI pragmatically.">
+  <meta name="theme-color" content="#fbfaf7">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hasham Ahmad | Pragmatic Solutions Architect">
+  <meta property="og:description" content="Practical architecture for faster delivery and more reliable systems.">
+  <link rel="stylesheet" href="styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-306RQ1H12G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-306RQ1H12G');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-306RQ1H12G');</script>
+  <link rel="stylesheet" href="personal.css">
 </head>
-<body>
+<body data-page="home">
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="container">
-      <h1 class="site-title">Hasham Ahmad</h1>
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Posts</a>
-        <a href="gallery.html">Gallery</a>
+      <a class="brand" href="index.html" aria-label="Hasham Ahmad, home">
+        <span class="brand-mark" aria-hidden="true">HA</span>
+        <span class="brand-text">Hasham Ahmad</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation">Menu</button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="index.html" data-nav="home">Home</a>
+        <a href="work.html" data-nav="work">Work</a>
+        <a href="blog.html" data-nav="insights">Writing</a>
+        <a href="about.html" data-nav="about">About</a>
+        <a class="nav-cta" href="contact.html" data-nav="contact">Say hello</a>
       </nav>
     </div>
   </header>
 
-  <div class="page-wrapper">
-    <main class="main-content">
-      <section class="hero">
-        <img src="profile.png" alt="Hasham Ahmad" class="profile-photo" />
-        <h1 class="hero-title">Well, hi there.</h1>
-      </section>
-
-      <section class="intro">
-        <p>I'm Hasham — a solutions architect, cloud enthusiast, and part-time myth-buster (mainly when someone says "This will only take five minutes") with years of experience across the corporate world and service sector.</p>
-
-        <p>I specialize in building scalable, secure, and smart systems using both AWS and Azure, and have a deep appreciation for the magic of DevOps when done right. From automating CI/CD pipelines to designing cloud-native applications, I thrive at the intersection of tech and business — where real problems need real solutions (and fewer PowerPoint slides).</p>
-        
-        <p>I'm the Senior Solutions Architect & DevOps Consultant at <a href="https://www.fujifilm.com/fbau/en" target="_blank">FUJIFILM Data Management Solutions</a>. We're building cutting-edge data management solutions that help organizations transform their operations. I'm previously a Full-Stack .NET Developer and Technical Lead, working across Karachi, Dubai, and Sydney.</p>
-
-        <p>Over the years, I've worked with startups trying to scale and enterprises trying to stay nimble. My toolkit includes everything from .NET development to infrastructure as code, from agile delivery to "How-did-you-even-think-of-that?" solutions.</p>
-        
-        <p>Outside the terminal window, I'm a proud dad to two little legends, who've taught me more about negotiation and chaos management than any workshop ever could. I live in sunny Sydney, stay curious, and believe the best tech solutions begin with listening — and maybe a bit of caffeine.</p>
-        
-        <p><a href="blog.html">Check out my latest posts →</a></p>
-      </section>
-    </main>
-
-    <aside class="sidebar">
-      <section class="sidebar-section">
-        <h3>Get in touch</h3>
-        <p>hasham87@gmail.com</p>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>Follow me</h3>
-        <ul class="social-links">
-          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
-        </ul>
-      </section>
-
-      <section id="about" class="sidebar-section">
-        <h3>About</h3>
-        <p>Solutions Architect and DevOps enthusiast based in Sydney. 15+ years building and scaling software systems.</p>
-        <p><a href="#skills">Skills & Expertise →</a></p>
-      </section>
-
-      <section id="skills" class="sidebar-section skills-section" style="display: none;">
-        <h3>Skills & Expertise</h3>
-        <div class="skill-category">
-          <h4>Cloud & DevOps</h4>
-          <ul>
-            <li>AWS & Azure Architecture</li>
-            <li>CI/CD Pipelines</li>
-            <li>Infrastructure as Code</li>
-            <li>CloudWatch, App Insights</li>
-          </ul>
+  <main id="main-content">
+    <section class="hero-home">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Hi, I’m Hasham.</p>
+            <h1>I help teams make complex software <span>simpler to build</span> and easier to run.</h1>
+            <p class="hero-lede">I’m a Sydney-based software engineer and pragmatic solutions architect. I enjoy untangling difficult systems, finding a sensible path forward, and helping people deliver with confidence.</p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="work.html">See what I’ve worked on <span aria-hidden="true">→</span></a>
+              <a class="btn btn-secondary" href="contact.html">Say hello</a>
+            </div>
+          </div>
+          <div class="hero-portrait">
+            <div class="portrait-frame">
+              <img src="profile.png" alt="Portrait of Hasham Ahmad" width="500" height="500">
+            </div>
+            <p class="availability-note"><span>Good to know</span>I’m open to short projects, longer collaborations, and useful conversations with founders and technology teams.</p>
+          </div>
         </div>
-        <div class="skill-category">
-          <h4>Development</h4>
-          <ul>
-            <li>.NET Core, C#, ASP.NET</li>
-            <li>RESTful APIs</li>
-            <li>Entity Framework</li>
-            <li>JavaScript, HTML, CSS</li>
-          </ul>
-        </div>
-        <p><a href="#about" class="back-link">← Back</a></p>
-      </section>
-    </aside>
-  </div>
 
-  <script src="./script.js"></script>
+        <div class="proof-strip" aria-label="Career highlights">
+          <div class="proof-item"><strong>16+ years</strong><span>Software engineering and technical leadership</span></div>
+          <div class="proof-item"><strong>20+ apps</strong><span>Enterprise application governance experience</span></div>
+          <div class="proof-item"><strong>AWS + Azure</strong><span>Cloud, serverless and integration delivery</span></div>
+          <div class="proof-item"><strong>3 regions</strong><span>Australia, UAE and Pakistan</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface-section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">What I enjoy working on</p>
+          <h2>The work I’m usually happiest doing.</h2>
+          <p>I’m at my best when a problem is important, a little messy, and needs both technical depth and practical judgment.</p>
+        </div>
+        <div class="card-grid">
+          <article class="service-card">
+            <span class="card-index">01</span>
+            <div><h3>Cloud and platform architecture</h3><p>Designing AWS and Azure systems that are reliable, cost-conscious, and understandable to the people who will look after them.</p></div>
+          </article>
+          <article class="service-card">
+            <span class="card-index">02</span>
+            <div><h3>Modernization and delivery</h3><p>Helping older systems move forward without assuming everything needs a rewrite—or putting day-to-day delivery at risk.</p></div>
+          </article>
+          <article class="service-card">
+            <span class="card-index">03</span>
+            <div><h3>Practical uses of AI</h3><p>Finding useful, responsible ways for AI to remove repetitive work or make an existing product better.</p></div>
+          </article>
+          <article class="service-card">
+            <span class="card-index">04</span>
+            <div><h3>Hands-on technical leadership</h3><p>Working alongside founders and teams to make decisions, guide delivery, and keep the technical direction grounded.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="selected-work">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2>A few things I’ve worked on.</h2>
+          <p>Some details have to stay private, but these snapshots show the kinds of systems, teams, and challenges I’ve been trusted with.</p>
+        </div>
+        <div class="work-grid">
+          {% for item in collections.workItems %}{% if loop.index <= 3 %}
+          <article class="work-card{% if loop.first %} featured{% endif %}">
+            <p class="work-meta">{{ item.data.category }} · {{ item.data.organisation }}</p>
+            <h3>{{ item.data.title }}</h3>
+            <p>{{ item.data.summary }}</p>
+            <ul class="tag-list">{% for tag in item.data.capabilities %}<li>{{ tag }}</li>{% endfor %}</ul>
+          </article>
+          {% endif %}{% endfor %}
+        </div>
+        <a class="text-link" href="work.html">See all selected work <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="section surface-section">
+      <div class="container engagement-grid">
+        <div class="section-heading">
+          <p class="eyebrow">How we could work together</p>
+          <h2>Sometimes you need a second opinion. Sometimes you need another pair of hands.</h2>
+          <p>I’m available for both, from a focused conversation through to longer contractual work.</p>
+        </div>
+        <div class="engagement-list">
+          <article class="engagement-item"><span class="number-dot">01</span><div><strong>A second pair of eyes</strong><p>A focused review of an architecture, delivery problem, or AI idea—with an honest view of what I would do next.</p></div></article>
+          <article class="engagement-item"><span class="number-dot">02</span><div><strong>Help with a defined project</strong><p>Hands-on architecture and engineering support for a modernization, integration, or cloud initiative.</p></div></article>
+          <article class="engagement-item"><span class="number-dot">03</span><div><strong>Stay involved for longer</strong><p>Contractual technical leadership when a team needs continuity across architecture, delivery, and stakeholders.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Things I’m thinking about</p>
+          <h2>Notes from the work—and from learning along the way.</h2>
+        </div>
+        <div class="insight-grid">
+          {% for post in collections.publishedPosts %}{% if loop.index <= 3 %}
+          <article class="insight-card"><p class="post-meta">{{ post.data.category }}</p><h3>{{ post.data.title }}</h3><p>{{ post.data.description }}</p><a class="text-link" href="{{ post.url }}">Read the article →</a></article>
+          {% endif %}{% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-compact">
+      <div class="container">
+        <div class="cta-panel">
+          <p class="eyebrow">Let’s talk</p>
+          <h2>Have a tricky technical problem—or simply an interesting idea?</h2>
+          <p>You don’t need a polished brief. Tell me what you’re working on and we can start there.</p>
+          <a class="btn btn-primary" href="contact.html">Say hello <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><strong>Hasham Ahmad</strong><p>Software engineer, pragmatic solutions architect, and always curious about a better way to build.</p></div>
+        <nav class="footer-links" aria-label="Footer navigation"><strong>Explore</strong><a href="work.html">Work</a><a href="blog.html">Writing</a><a href="about.html">About</a></nav>
+        <div class="footer-links"><strong>Connect</strong><a href="mailto:hasham87@gmail.com">Email</a><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/hassham" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+      </div>
+      <div class="footer-bottom"><span>© <span data-current-year>2026</span> Hasham Ahmad</span><span>Made in Sydney, Australia</span></div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
-    

@@ -1,43 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Building Scalable Cloud Solutions with AWS - Hasham Ahmad</title>
-  <meta name="description" content="Exploring best practices for architecting cloud-native applications that scale seamlessly and remain cost-effective on AWS.">
-  <meta name="keywords" content="AWS, cloud architecture, scalability, Lambda, ECS, DevOps">
-  <link rel="stylesheet" href="../styles.css" />
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-306RQ1H12G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-306RQ1H12G');
-  </script>
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title"><a href="../index.html">Hasham Ahmad</a></h1>
-      <nav class="main-nav">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#about">About</a>
-        <a href="../blog.html">Posts</a>        <a href="../gallery.html">Gallery</a>      </nav>
-    </div>
-  </header>
-
-  <div class="page-wrapper">
-    <main class="main-content">
-      <article class="blog-post">
-        <header class="post-header">
-          <p class="post-meta">December 7, 2025 • 8 min read</p>
-          <h1 class="post-title-full">Building Scalable Cloud Solutions with AWS</h1>
-        </header>
-
-        <div class="post-content">
-          <p>Over the past decade, I've architected and deployed dozens of cloud-native applications on AWS. What started as simple EC2 instances has evolved into sophisticated serverless architectures, containerized workloads, and everything in between. Here's what I've learned about building systems that actually scale.</p>
+---
+title: "Building Scalable Cloud Solutions with AWS"
+slug: building-scalable-cloud-solutions-aws
+description: "A practical decision framework for architecting cloud-native applications that scale reliably and remain cost-conscious on AWS."
+category: "Cloud architecture"
+date: 2025-12-07
+dateDisplay: "December 7, 2025"
+readTime: "8 min read"
+published: true
+topicTags:
+  - "AWS"
+  - "Cloud architecture"
+  - "Scalability"
+  - "Reliability"
+---
+<p class="article-note">This is an educational technical note. Example scenarios and figures are illustrative unless explicitly identified as measured production results.</p>
+          <p>Building enterprise software and serverless AWS workflows has reinforced a simple lesson: scalable systems begin with clear constraints, not a collection of fashionable services. The following framework focuses on foundations that can evolve.</p>
 
           <h2>Start with the Right Foundation</h2>
           
@@ -122,19 +99,19 @@ Resources:
             <li>Regular security audits with AWS Security Hub</li>
           </ul>
 
-          <h2>Real-World Example: Scaling a SaaS Platform</h2>
+          <h2>Reference Architecture: Scaling a SaaS Platform</h2>
 
-          <p>Recently, I worked on a SaaS platform that went from 1,000 to 100,000 users in six months. Here's what made it possible:</p>
+          <p>Consider an illustrative SaaS platform preparing for a large increase in demand. A suitable reference architecture might combine:</p>
 
           <ol>
             <li><strong>API Gateway + Lambda</strong> - Handled variable traffic without managing servers</li>
             <li><strong>DynamoDB</strong> - Auto-scaling NoSQL database that kept up with growth</li>
-            <li><strong>CloudFront</strong> - CDN for static assets, reducing origin load by 80%</li>
+            <li><strong>CloudFront</strong> - CDN for static assets, reducing pressure on the origin</li>
             <li><strong>SQS + Lambda</strong> - Async processing for heavy background tasks</li>
             <li><strong>ElastiCache</strong> - Redis for session management and caching</li>
           </ol>
 
-          <p>Cost per user actually decreased as we scaled because we optimized the architecture early.</p>
+          <p>With measurement and regular right-sizing, this approach can reduce cost per user as the platform scales.</p>
 
           <h2>Key Takeaways</h2>
 
@@ -149,48 +126,5 @@ Resources:
 
           <p>Building scalable cloud solutions isn't about using the fanciest services—it's about choosing the right tools for your specific needs and building a solid foundation that can grow with you.</p>
 
-          <p>What's your experience with AWS? Any lessons learned you'd add? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">Let's connect on LinkedIn</a> and share notes.</p>
-        </div>
+          <p>What's your experience with AWS? Any lessons learned you'd add? <a href="https://www.linkedin.com/in/hashamahmad/" target="_blank" rel="noopener noreferrer">Let's connect on LinkedIn</a> and share notes.</p>
 
-        <footer class="post-footer">
-          <div class="post-tags">
-            <span class="tag">AWS</span>
-            <span class="tag">Cloud Architecture</span>
-            <span class="tag">Scalability</span>
-            <span class="tag">DevOps</span>
-          </div>
-          <div class="post-nav">
-            <a href="../blog.html" class="back-to-blog">← Back to all posts</a>
-          </div>
-        </footer>
-      </article>
-    </main>
-
-    <aside class="sidebar">
-      <section class="sidebar-section">
-        <h3>Get in touch</h3>
-        <p>hasham87@gmail.com</p>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>Follow me</h3>
-        <ul class="social-links">
-          <li><a href="https://www.linkedin.com/in/hashamahmad/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/hassham" target="_blank">GitHub</a></li>
-        </ul>
-      </section>
-
-      <section class="sidebar-section">
-        <h3>More Posts</h3>
-        <ul class="social-links">
-          <li><a href="art-of-devops-beyond-buzzwords.html">The Art of DevOps</a></li>
-          <li><a href="dotnet-framework-to-core-migration.html">.NET Migration Story</a></li>
-          <li><a href="infrastructure-as-code-cloudformation.html">Infrastructure as Code</a></li>
-        </ul>
-      </section>
-    </aside>
-  </div>
-
-  <script src="../script.js"></script>
-</body>
-</html>
