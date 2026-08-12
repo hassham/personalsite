@@ -26,23 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const contactForm = document.querySelector('[data-contact-form]');
   if (contactForm) {
-    contactForm.addEventListener('submit', (event) => {
+    contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const data = new FormData(contactForm);
-      const name = data.get('name') || 'Website visitor';
-      const email = data.get('email') || '';
-      const organisation = data.get('organisation') || 'Not provided';
-      const topic = data.get('topic') || 'General enquiry';
-      const message = data.get('message') || '';
-      const subject = encodeURIComponent(`Website enquiry: ${topic}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nOrganisation: ${organisation}\nTopic: ${topic}\n\n${message}`
-      );
       const status = contactForm.querySelector('[data-form-status]');
-      if (status) {
-        status.textContent = 'Opening your email application with the message prepared.';
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = true;
+      if (status) status.textContent = 'Sending…';
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' },
+        });
+        if (response.ok) {
+          if (status) status.textContent = 'Thanks — your message is on its way. I’ll get back to you soon.';
+          contactForm.reset();
+        } else {
+          if (status) status.textContent = 'Something went wrong sending that. Please try again in a moment.';
+        }
+      } catch (error) {
+        if (status) status.textContent = 'Something went wrong sending that. Please try again in a moment.';
+      } finally {
+        if (submitButton) submitButton.disabled = false;
       }
-      window.location.href = `mailto:hasham87@gmail.com?subject=${subject}&body=${body}`;
     });
   }
 });
