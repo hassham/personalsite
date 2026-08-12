@@ -180,7 +180,7 @@ See the LICENSE file for details.
 
 ## 📧 Contact
 
-- Email: hasham87@gmail.com
+- Contact form: [hashamahmad.com/contact.html](https://hashamahmad.com/contact.html)
 - LinkedIn: [hashamahmad](https://www.linkedin.com/in/hashamahmad/)
 - GitHub: [hassham](https://github.com/hassham)
 
