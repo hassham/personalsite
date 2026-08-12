@@ -61,7 +61,7 @@ h3 { font-size: 1.24rem; }
 .btn-secondary { color: var(--ink); background: rgba(255, 255, 255, 0.55); border-color: var(--line); }
 
 .proof-strip { margin-top: 4rem; padding: 1.5rem 0 0; background: transparent; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; }
-.proof-item { padding: 0 1.5rem 0 0; border-color: var(--line); }
+.proof-item { border-color: var(--line); }
 .proof-item strong { color: var(--accent-dark); font-size: 1.08rem; }
 .proof-item span { color: var(--muted); font-size: 0.82rem; }
 .section-heading { max-width: 720px; margin-bottom: 2.5rem; }
