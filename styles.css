@@ -713,6 +713,23 @@ h3 {
   color: var(--muted);
 }
 
+.posts-section-group {
+  margin-bottom: 3rem;
+}
+
+.posts-section-group:last-child {
+  margin-bottom: 0;
+}
+
+.posts-section-title {
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+}
+
+.posts-empty {
+  color: var(--muted);
+}
+
 .posts-section {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

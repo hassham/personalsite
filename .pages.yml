@@ -42,7 +42,7 @@ content:
         type: select
         required: true
         options:
-          values: [Applied AI, Cloud architecture, Cloud delivery, Delivery, Modernization, Technical leadership]
+          values: ["Things I Learned from Vibecoding", "Things I Developed and Are Live", "System Design", "Cloud"]
       - name: date
         label: Publish date
         type: date
