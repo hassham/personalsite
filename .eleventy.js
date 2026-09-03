@@ -1,3 +1,10 @@
+const WRITING_SECTIONS = [
+  "Things I Learned from Vibecoding",
+  "Things I Developed and Are Live",
+  "System Design",
+  "Cloud"
+];
+
 module.exports = function (eleventyConfig) {
   [
     "styles.css",
@@ -14,6 +21,18 @@ module.exports = function (eleventyConfig) {
       .filter((item) => item.data.published !== false)
       .sort((a, b) => b.date - a.date)
   );
+
+  eleventyConfig.addCollection("postsBySection", (collectionApi) => {
+    const posts = collectionApi
+      .getFilteredByTag("posts")
+      .filter((item) => item.data.published !== false)
+      .sort((a, b) => b.date - a.date);
+
+    return WRITING_SECTIONS.map((section) => ({
+      section,
+      posts: posts.filter((post) => post.data.category === section)
+    }));
+  });
 
   eleventyConfig.addCollection("workItems", (collectionApi) =>
     collectionApi

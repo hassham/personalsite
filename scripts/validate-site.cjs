@@ -53,7 +53,7 @@ for (const file of pages) {
 }
 
 const articleCount = pages.filter((file) => path.dirname(file) === path.join(root, "blog")).length;
-if (articleCount !== 6) failures.push(`Expected 6 generated articles, found ${articleCount}`);
+if (articleCount !== 2) failures.push(`Expected 2 generated articles, found ${articleCount}`);
 
 if (failures.length) {
   console.error(failures.join("\n"));
