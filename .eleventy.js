@@ -49,6 +49,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.ignores.add("blog/_TEMPLATE_GUIDE.md");
   eleventyConfig.ignores.add("node_modules/**");
   eleventyConfig.ignores.add("_site/**");
+  eleventyConfig.ignores.add("passcitizenshiptest/**");
 
   return {
     dir: {

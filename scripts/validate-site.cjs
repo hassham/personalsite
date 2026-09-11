@@ -53,7 +53,16 @@ for (const file of pages) {
 }
 
 const articleCount = pages.filter((file) => path.dirname(file) === path.join(root, "blog")).length;
-if (articleCount !== 2) failures.push(`Expected 2 generated articles, found ${articleCount}`);
+const postsDirectory = path.resolve(__dirname, "..", "content", "posts");
+const expectedArticleCount = fs.readdirSync(postsDirectory)
+  .filter((file) => /\.(html|md)$/.test(file))
+  .filter((file) => {
+    const source = fs.readFileSync(path.join(postsDirectory, file), "utf8");
+    const frontMatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    return frontMatter && YAML.parse(frontMatter[1]).published !== false;
+  }).length;
+if (articleCount !== expectedArticleCount) failures.push(`Expected ${expectedArticleCount} generated articles, found ${articleCount}`);
+if (fs.existsSync(path.join(root, "passcitizenshiptest"))) failures.push("Private app reference notes must not appear in the generated site");
 
 if (failures.length) {
   console.error(failures.join("\n"));
