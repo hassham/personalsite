@@ -1,4 +1,5 @@
 const WRITING_SECTIONS = [
+  "New Learnings",
   "Things I Learned from Vibecoding",
   "Things I Developed and Are Live",
   "System Design",
