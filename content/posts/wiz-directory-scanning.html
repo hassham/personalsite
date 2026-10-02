@@ -1,0 +1,89 @@
+---
+title: "Wiz Directory Scanning: Shifting Security Left Without Losing the Cloud Context"
+seoTitle: "Wiz Directory Scanning Explained: Benefits and Challenges"
+slug: wiz-directory-scanning
+description: "A look at how Wiz's CLI directory scanning works, how it fits alongside Wiz's cloud-side scanning, and the real benefits and friction points of using it day to day."
+category: "New Learnings"
+date: 2026-10-02
+dateDisplay: "October 2, 2026"
+publishedIso: "2026-10-02T00:00:00+10:00"
+readTime: "7 min read"
+published: true
+topicTags:
+  - "Security"
+  - "Wiz"
+  - "DevSecOps"
+  - "CI/CD"
+articleSeo:
+  "@context": "https://schema.org"
+  "@type": "BlogPosting"
+  headline: "Wiz Directory Scanning: Shifting Security Left Without Losing the Cloud Context"
+  description: "A look at how Wiz's CLI directory scanning works, how it fits alongside Wiz's cloud-side scanning, and the real benefits and friction points of using it day to day."
+  datePublished: "2026-10-02T00:00:00+10:00"
+  mainEntityOfPage: "https://www.hashamahmad.com/blog/wiz-directory-scanning.html"
+  author:
+    "@type": "Person"
+    name: "Hasham Ahmad"
+    url: "https://www.hashamahmad.com/about.html"
+---
+{% raw %}
+<p class="article-note">This is an educational technical note based on general product behaviour. Specifics of commands, flags and policy names may differ by Wiz CLI version and account configuration.</p>
+
+<p>Most people encounter Wiz first as a dashboard — the Security Graph lighting up cloud accounts with risk scores and "toxic combination" findings. What's less talked about is the other half of the product: <strong>directory scanning</strong>, where the Wiz CLI points at a local folder — a checked-out repo, a build artifact, a monorepo subdirectory — instead of a cloud account. I've been using it as part of a CI pipeline recently, and it's worth writing down what it actually does, and where it still needs a human watching it.</p>
+
+<h2>What directory scanning actually is</h2>
+<p>Wiz's platform is built around scanning cloud resources after they exist — VMs, containers, storage, identities — and connecting them into a graph so you can see which risks are actually reachable. Directory scanning is the shift-left counterpart to that: instead of waiting for infrastructure to be deployed, the <code>wizcli dir scan</code> command scans a local directory before any of it ships, looking for:</p>
+<ul>
+<li><strong>IaC misconfigurations</strong> — insecure defaults in Terraform, CloudFormation, Kubernetes manifests, and Dockerfiles.</li>
+<li><strong>Secrets</strong> — API keys, credentials, and tokens that have been committed into files.</li>
+<li><strong>Vulnerable dependencies (SCA)</strong> — known CVEs in whatever package manifests and lockfiles it finds (<code>package.json</code>, <code>requirements.txt</code>, <code>go.mod</code>, and similar).</li>
+<li><strong>Sensitive data</strong> — patterns that look like PII or other data that shouldn't be sitting in a repo.</li>
+</ul>
+<p>In practice it looks something like this in a pipeline step:</p>
+<pre><code>wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"
+wizcli dir scan --path . --policy my-ci-policy</code></pre>
+<p>The scan runs against a named policy — Wiz's rule set for what counts as a failing condition — and returns a pass/fail result along with a findings report. Wire that into a build pipeline and you have a gate that runs before a merge or a deploy, rather than a dashboard you check after the fact.</p>
+
+<h2>Why it's more than "another linter"</h2>
+<p>The part that makes this different from bolting on <code>tfsec</code>, <code>gitleaks</code>, and <code>trivy</code> separately is the connection back to the Security Graph. Because directory scanning and cloud scanning share the same platform, a finding in code isn't evaluated in isolation — Wiz can correlate it with what's actually running in your cloud environment. A hardcoded secret in a repo that corresponds to a key with real, overly broad permissions in production is a very different finding from the same secret pattern in a throwaway test fixture. That code-to-cloud context is the main reason to use Wiz's own scanner instead of, or alongside, point tools that only ever see the repo.</p>
+
+<h2>Benefits</h2>
+<h3>1. Genuine shift-left</h3>
+<p>Catching a misconfigured S3 bucket definition or a leaked key in CI, before it's merged, is cheaper than catching it after Wiz's cloud scanner finds it live in production. The cost of fixing a finding grows the further right it travels — CI is about as far left as it gets without being in the IDE.</p>
+
+<h3>2. One policy framework across scan types</h3>
+<p>IaC, secrets, SCA, and sensitive data all run through the same CLI and the same policy model, rather than maintaining separate configs, suppression files, and severity thresholds for four different tools. Fewer moving parts means fewer places for a team to disagree about what "failing" means.</p>
+
+<h3>3. Fast, local feedback loop</h3>
+<p>Because it's scanning a directory on disk rather than waiting on cloud API calls, a scan of a reasonably sized repo is quick enough to run on every pull request, or even locally before pushing, without the latency of a full cloud resync.</p>
+
+<h3>4. Reachability context once deployed</h3>
+<p>The real payoff shows up later: when the code this CLI scanned actually gets deployed, the same findings show up in the Security Graph connected to runtime exposure — internet-facing, attached to an over-permissioned role, sitting next to sensitive data — instead of as a flat severity score with no sense of whether it's reachable at all.</p>
+
+<h2>Challenges</h2>
+<h3>1. Tuning takes real effort</h3>
+<p>Out of the box, broad secret and sensitive-data detection throws false positives — test fixtures, rotated keys still sitting in git history, sample config files that look like real credentials but aren't. Getting a policy to a signal-to-noise ratio a team will actually respect takes deliberate tuning, not a default config left alone.</p>
+
+<h3>2. Another credential to manage</h3>
+<p>The CLI authenticates with a service account (client ID and secret), which means another set of credentials to store securely in CI and rotate — ironic for a security tool, but a real operational detail that's easy to treat as an afterthought.</p>
+
+<h3>3. Policy-as-code has a learning curve</h3>
+<p>Writing or customising Wiz policies beyond the defaults means learning Wiz's policy model, which is its own investment on top of understanding the underlying IaC or SCA rules it's built on. Teams without existing policy-as-code experience will spend real time here before the gate reflects what they actually want enforced.</p>
+
+<h3>4. Gating can create friction before trust is established</h3>
+<p>Turning a scan into a hard CI gate before a team has had a chance to triage and tune findings tends to generate frustration rather than adoption. It's usually better to run in report-only mode first, let people see what gets flagged, fix the obvious noise, and only then start failing builds on it.</p>
+
+<h3>5. It's a point-in-time check, not continuous coverage</h3>
+<p>A directory scan reflects the repo at the moment CI ran. It says nothing about drift that happens after deployment — a manually changed security group, a permission added outside of IaC. That's still the job of Wiz's cloud-side scanning, and it's worth being explicit with a team that directory scanning and cloud scanning are complementary, not substitutes for each other.</p>
+
+<h2>Key takeaways</h2>
+<ul>
+<li>Wiz directory scanning (<code>wizcli dir scan</code>) runs IaC, secrets, SCA, and sensitive-data checks against a local directory, typically from CI, before anything is deployed.</li>
+<li>Its main edge over standalone scanners is the shared Security Graph — findings in code can later be correlated with real runtime exposure once deployed.</li>
+<li>The biggest practical cost isn't running the scan, it's tuning policies and credential management so the gate is trusted rather than ignored.</li>
+<li>Start in report-only mode to build trust in the findings before turning it into a hard merge/deploy gate.</li>
+<li>It complements cloud-side scanning rather than replacing it — directory scans don't see configuration drift that happens after deployment.</li>
+</ul>
+
+<p>The honest summary: directory scanning is a genuinely useful shift-left addition, but it's not a drop-in replacement for a well-tuned set of point tools on day one. The value compounds once the policies are tuned and the findings are actually tied back to what's running in the cloud — which also means the first few weeks of adoption are more about calibration than security wins.</p>
+{% endraw %}
