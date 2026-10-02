@@ -12,6 +12,10 @@ module.exports = function (eleventyConfig) {
     "personal.css",
     "script.js",
     "profile.png",
+    "favicon.ico",
+    "favicon-32x32.png",
+    "favicon-16x16.png",
+    "apple-touch-icon.png",
     "robots.txt",
     "media"
   ].forEach((path) => eleventyConfig.addPassthroughCopy(path));
